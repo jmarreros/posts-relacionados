@@ -20,9 +20,12 @@
     $terms = get_the_terms( get_the_ID(), 'category');
     $categ = array();
     
-    foreach ($terms as $term) 
+    if ( $terms )
     {
-    	$categ[] = $term->term_id;
+	foreach ($terms as $term) 
+    	{
+    		$categ[] = $term->term_id;
+    	}
     }
 
     $loop	= new WP_QUERY(array(
