@@ -1,0 +1,60 @@
+<?php
+  
+ function dc_related_after_content( $content ) 
+ { 
+    
+    if ( !is_singular('post') ) return $content;	
+	
+	$cad			= "";
+	$template_li 	= '<li>
+							<a class="thumb_rel" href="{url}">{thumb}</a>
+							<a class="title_rel" href="{url}">{title}</a>
+						</li>';
+	$template_rel	= '<div class="rel_posts">
+							<h3>Artículos Relacionados</h3>
+							<ul>
+								{list}
+							</ul>
+					   </div>';
+
+    $terms = get_the_terms( get_the_ID(), 'post_tag');
+    $tags = array();
+    
+    foreach ($terms as $term) 
+    {
+    	$tags[] = $term->term_id;
+    }
+
+    $loop	= new WP_QUERY(array(
+    				'tag__in'			=> $tags,
+    				'posts_per_page'	=> 4,
+    				'post__not_in'		=>array(get_the_ID()),
+    				'orderby'			=>'asc'
+    				));
+
+    if ( $loop->have_posts() )
+    {
+
+    	while ( $loop->have_posts() )
+    	{
+    		$loop->the_post();
+
+    		$search	 = Array('{url}','{thumb}','{title}');
+	  		$replace = Array(get_permalink(),get_the_post_thumbnail(),get_the_title());
+    	
+    		$cad .= str_replace($search,$replace, $template_li);
+    		// echo "hola";
+    	}
+
+    	if ( $cad ) 
+    	{
+		  	$content .= str_replace('{list}', $cad, $template_rel);
+    	}
+
+    }
+   	wp_reset_query();
+
+    return $content;
+}
+
+add_filter( 'the_content', 'dc_related_after_content'); 	
