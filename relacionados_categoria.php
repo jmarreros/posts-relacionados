@@ -22,10 +22,13 @@
     
     if ( $terms )
     {
-	foreach ($terms as $term) 
+    	foreach ($terms as $term) 
     	{
     		$categ[] = $term->term_id;
     	}
+    }
+    else{
+    	return $content;
     }
 
     $loop	= new WP_QUERY(array(
