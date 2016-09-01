@@ -43,7 +43,6 @@
 	  		$replace = Array(get_permalink(),get_the_post_thumbnail(),get_the_title());
     	
     		$cad .= str_replace($search,$replace, $template_li);
-    		// echo "hola";
     	}
 
     	if ( $cad ) 
