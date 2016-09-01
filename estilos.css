@@ -22,3 +22,18 @@
   display: block;
   padding: 4px;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .rel_posts ul li {
+    width: 40%;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+  .rel_posts ul li:nth-child(odd) {
+    clear: both;
+  }
+}
+
+
+
