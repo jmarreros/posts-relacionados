@@ -22,8 +22,6 @@
   display: block;
   padding: 4px;
 }
-
-
 @media only screen and (max-width: 600px) {
   .rel_posts ul li {
     width: 40%;
@@ -34,6 +32,3 @@
     clear: both;
   }
 }
-
-
-
